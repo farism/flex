@@ -2,7 +2,7 @@
 
 type
   FlexAlign* {.size: sizeof(cint).} = enum
-    Auto = 0
+    Auto
     Stretch
     Center
     Start
@@ -12,17 +12,17 @@ type
     SpaceEvenly
 
   FlexPosition* {.size: sizeof(cint).} = enum
-    Relative = 0
+    Relative
     Absolute
 
   FlexDirection* {.size: sizeof(cint).} = enum
-    Row = 0
+    Row
     RowReverse
     Column
     ColumnReverse
 
   FlexWrap* {.size: sizeof(cint).} = enum
-    NoWrap = 0
+    NoWrap
     Wrap
     WrapReverse
 
@@ -64,40 +64,33 @@ type
 
   FlexItem* = ptr FlexItemObj
 
-proc flex_item_new(): FlexItem {.importc: "flex_item_new".}
+proc flex_item_new(): FlexItem {.importc.}
 
-proc flex_item_free(item: FlexItem) {.importc: "flex_item_free", .}
+proc flex_item_free(item: FlexItem) {.importc.}
 
-proc flex_item_add(item: FlexItem, child: FlexItem) {.
-    importc: "flex_item_add".}
+proc flex_item_add(item: FlexItem, child: FlexItem) {.importc.}
 
-proc flex_item_insert(item: FlexItem, index: cuint,
-    child: FlexItem) {.importc: "flex_item_insert".}
+proc flex_item_insert(item: FlexItem, index: cuint, child: FlexItem) {.importc.}
 
-proc flex_item_delete(item: FlexItem, index: cuint): FlexItem {.
-    importc: "flex_item_delete".}
+proc flex_item_delete(item: FlexItem, index: cuint): FlexItem {.importc.}
 
-proc flex_item_count(item: FlexItem): cuint {.importc: "flex_item_count".}
+proc flex_item_count(item: FlexItem): cuint {.importc.}
 
-proc flex_item_child(item: FlexItem, index: cuint): FlexItem {.
-    importc: "flex_item_child".}
+proc flex_item_child(item: FlexItem, index: cuint): FlexItem {.importc.}
 
-proc flex_item_root(item: FlexItem): FlexItem {.
-    importc: "flex_item_root".}
+proc flex_item_parent(item: FlexItem): FlexItem {.importc.}
 
-proc flex_layout(item: FlexItem) {.importc: "flex_layout".}
+proc flex_item_root(item: FlexItem): FlexItem {.importc.}
 
-proc flex_item_get_frame_x(item: FlexItem): cfloat {.
-    importc: "flex_item_get_frame_x".}
+proc flex_layout(item: FlexItem) {.importc.}
 
-proc flex_item_get_frame_y(item: FlexItem): cfloat {.
-    importc: "flex_item_get_frame_y".}
+proc flex_item_get_frame_x(item: FlexItem): cfloat {.importc.}
 
-proc flex_item_get_frame_width(item: FlexItem): cfloat {.
-    importc: "flex_item_get_frame_width".}
+proc flex_item_get_frame_y(item: FlexItem): cfloat {.importc.}
 
-proc flex_item_get_frame_height(item: FlexItem): cfloat {.
-    importc: "flex_item_get_frame_height".}
+proc flex_item_get_frame_width(item: FlexItem): cfloat {.importc.}
+
+proc flex_item_get_frame_height(item: FlexItem): cfloat {.importc.}
 
 proc newFlexItem*(
   width,
@@ -172,6 +165,10 @@ proc child*(item: FlexItem, index: int): FlexItem =
 proc len*(item: FlexItem, index: int): int =
   ## Returns the number of children added to `item`.
   item.flex_item_count().int
+
+proc parent*(item: FlexItem): FlexItem =
+  ## Returns the direct parent of `item`
+  item.flex_item_parent()
 
 proc root*(item: FlexItem): FlexItem =
   ## Starting at `item`, traverses up to find the root FlexItem.
