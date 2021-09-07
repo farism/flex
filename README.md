@@ -28,8 +28,12 @@ root.add(bottomRow)
 root.layout()
 ```
 
+Please view the [documentation](https://farism.github.io/flex/) for more information.
+
 # Examples
 
 ![Demo](docs/demo.gif)
 
-Please see the [SDL2 example](examples/sdl.nim) for a flexbox layout demo. You can resize the window to see real time layouts.
+Please see the [SDL2 example](examples/sdl.nim) for a flexbox layout demo. 
+
+You can run the example with `nimble sdl`.
