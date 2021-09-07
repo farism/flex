@@ -1,8 +1,3 @@
-# Introduction
-
-This repository contains Nim bindings for the [Xamarin/Flex](https://github.com/xamarin/flex) C library.
-
-The API matches the Flexbox CSS API, and is meant to serve as the base building blocks for more complex widgets.
 
 # Installation
 
@@ -10,10 +5,31 @@ The API matches the Flexbox CSS API, and is meant to serve as the base building 
 $ nimble install https://github.com/farism/flex.git
 ```
 
-# Building
+# Introduction
 
-The underlying C library is statically linked into the package, providing easy portability.
+This repository contains Nim bindings for the [Xamarin/Flex](https://github.com/xamarin/flex) C library. It is statically linked for easily portability.
+
+The styling API follows the Flexbox CSS API, and is meant to serve as the base building blocks for more complex widgets.
+
+# Usage
+
+```nim
+var 
+  root = newFlexItem(640, 480, direction = Column, justifyContent = SpaceBetween)        # black
+  topRow = newFlexItem(0, 300, direction = Row, paddingTop = 20, paddingBottom = 20)     # blue
+  bottomRow = newFlexItem(0, 100, direction = Row)                                       # teal
+  leftChild = newFlexItem(0, 0, grow = 1)                                                # red
+  rightChild = newFlexItem(0, 0, grow = 1)                                               # green
+
+topRow.add(leftChild)
+topRow.add(rightChild)
+root.add(topRow)
+root.add(bottomRow)
+root.layout()
+```
 
 # Examples
 
-Please see the [SDL2 example]() for a flexbox layout demo. You can resize the window to see real time layouts.
+![Demo](docs/demo.gif)
+
+Please see the [SDL2 example](examples/sdl.nim) for a flexbox layout demo. You can resize the window to see real time layouts.
